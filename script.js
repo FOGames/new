@@ -1,7 +1,14 @@
 function loadGames(categoryFilter) {
-    const data = allGames; // استخدام المتغير مباشرة
+    // التأكد أن المتغير allGames موجود (من ملف data.js)
+    const data = typeof allGames !== 'undefined' ? allGames : { segments: [] };
     const container = document.getElementById('games-container');
-    container.innerHTML = '';
+
+    if (!container) {
+        console.error("خطأ: لم أجد عنصر اسمه games-container في صفحة الـ HTML!");
+        return;
+    }
+
+    container.innerHTML = ''; // تنظيف الحاوية
 
     data.segments.forEach(segment => {
         segment.hits.forEach(game => {
@@ -16,4 +23,3 @@ function loadGames(categoryFilter) {
         });
     });
 }
-loadGames('puzzle');
